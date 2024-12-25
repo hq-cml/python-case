@@ -32,7 +32,7 @@ def decimal1():
 # Note: 求幂，两种方法
 #       pow(x, y) 或者 x ** y
 def div1():
-    print(3//2)
+    print(3//2) #地板除法
     print(-3//2) # 注意理解为什么是-2
     print(divmod(33,2)) # 直接求商和余数
     print(int('32'))

@@ -37,7 +37,15 @@ def random1():
     i = random.randint(1,10)
     print(i)
 
+# Note 逻辑运算符
+#      and or not
+#      短路原则
+def bool1():
+    print(3 and 4)
+    print(3 or 4)
+    print(not 3)
 
 #str1()
 #str2()
-random1()
+#random1()
+bool1()
