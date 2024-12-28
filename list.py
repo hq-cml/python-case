@@ -126,11 +126,42 @@ def list7():
     print(x)
     print(z)
 
+# Note：列表推导式（步进优雅，而且效率更高，因为推导式是用C实现的）
+def list8():
+    l = [1,2,3]
+    y = [i*2 for i in l] # 列表元素*2
+    print(y)
+    print([i for i in range(10)]) # 推导式初始化一个列表
+    print([i*10 for i in range(10)])
+    print([c*2 for c in "Hello"])
+    print([ord(c) for c in "Hello"]) # 每个字符转成unicode编码
+    matrix = [[1,2,3], # 矩阵
+              [4,5,6],
+              [7,8,9]]
+    print([row[1] for row in matrix]) # 推导列表第二列
+    print([matrix[i][i] for i in range(len(matrix[0]))]) # 对角线
+    # 推导式创建并初始化n维数组
+    n = 3
+    print([[0] * n for i in range(n)])
 
-#list1()
+# Note:推导式高级用法
+# if 分句，用于二次过滤
+# 推导式的嵌套
+def list9():
+    print([i for i in range(20) if i % 2==0]) # 仅打印偶数序列
+    print([w for w in ["fuck", "bitch", "shit", "bullshit"] if w[0] == 'b']) # 取出b开头的单词
+    matrix = [[1,2,3], # 矩阵
+              [4,5,6],
+              [7,8,9]]
+    print([ c for row in matrix for c in row]) # 利用推导式嵌套，将二维展开成一维，有点烧脑
+    print([x+y for x in "abc" for y in "ABC" ]) # 笛卡尔积
+    print([[x,y] for x in range(10) if x %2==0 for y in range(10) if y%3==0]) # 嵌套和if相结合
+#list1()fatkun
 #list2()
 #list3()
 #list4()
 #list5()
 #list6()
-list7()
+#list7()
+#list8()
+list9()
