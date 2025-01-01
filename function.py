@@ -4,7 +4,7 @@ def func1():
 
 # 参数
 def func2():
-    def subf1(a, b):
+    def subf1(a, b): # Note：函数嵌套
         print(a,b)
 
     # 位置参数
@@ -73,5 +73,22 @@ def func3():
     x, y, z = sub1()
     print(x, y, z) # 也可以直接解包得到返回值
 
-func2()
+# 作用域
+x = 100 # 全局
+def func4():
+    print(x)
+
+# 嵌套函数 & 内部修改外部值
+def func5():
+    x= 10
+    def funcs1():
+        nonlocal x # 声明x是非本地，也就是外层x
+        x = 20
+        print("in funcs1: ", x)
+    funcs1()
+    print("in func5: ", x)
+
+#func2()
 #func3()
+#func4()
+func5()
