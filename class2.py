@@ -101,8 +101,9 @@ def func5():
     e = E2()
 
 
-#MRO：Python解析顺序
+#MRO：Python解析顺序，解析顺序=>执行顺序
 #可以直接通过Class.mro()查看
+#这个非常重要，一些Mixin问题，都可以遵循这个原则找到答案
 def func6():
     print(E2.mro())
 
