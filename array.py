@@ -75,7 +75,9 @@ def arr7():
     print(list(filtered))
 
 # Note: 迭代器和可迭代对象
-# 迭代器必然是可迭代对象；前者是一次性的，后者是可重复使用的
+# 迭代器必然是可迭代对象，反之不然
+#    迭代器是一次性的
+#    迭代对象可重复使用的
 def arr8():
     maped = map(ord, "Hello")
     print(list(maped)) # 仅可使用一次
