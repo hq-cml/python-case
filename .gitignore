@@ -2,3 +2,4 @@
 .venv
 a.txt
 data.pkl
+__pycache__
