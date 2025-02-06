@@ -1,4 +1,6 @@
-#Ptyhon中，文件就是模块，文件名==模块名
+#Ptyhon中
+# 文件就是模块，文件名==模块名
+# 包，是目录
 
 #Python导入模块的三种方式：
 #1. import 模块名 // 这种方式需要 module. 的前缀，虽然麻烦但是可以避免重复名字的问题
@@ -12,7 +14,7 @@
 
 #包，也就是目录
 #它的作用是将模块的分门别类管理
-import tc.m1 as mm
+import tc.m1 as mm #包的导入要配合.也就是“包名.模块名”
 import tc
 def func1():
     mm.func1()

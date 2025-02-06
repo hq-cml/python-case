@@ -6,6 +6,7 @@ def func2():
     import tc
     print(tc.x)
 
+#模块的全局变量
 x = 123
 
 print("模块名：", __name__)
