@@ -1,33 +1,40 @@
-# python中字典和集合的关系，很暧昧
+# python中字典和集合的关系，很密切
+# set最核心的特性：唯一性、无序性
 def set1():
     # 类型关系
     print(type({}))
-    print(type({"a"}))
+    print(type({"a"})) #只有key，无val，则它就是set！
     print(type({"a":1}))
 
     # 集合创建
     s1 = {"a", "b"} # 方法1：花括号
     s2 = {i for i in "abc"} #方法2：推导式
     print(s2, type(s2))
-    s3 = set("abc") # 方法3：类型构造器，参数是一个可迭代对象
+    s3 = set("abc") # 方法3：类型构造器，参数是一个可迭代对象，这里最恶心，解释：
+    # 因为 set() 构造函数的参数是一个可迭代对象，它会遍历这个可迭代对象，
+    # 把迭代出来的每个元素作为一个集合项。"abc" 是一个字符串，字符串是可迭代的，
+    # 迭代结果是它的每一个字符：'a'、'b'、'c'。所以 set("abc") 等价于 set(['a', 'b', 'c'])，
+    # 得到 {'a', 'b', 'c'}
     print(s3, type(s3))
 
     # in 和 not in
     print("a" in s1)
     print("c" in s1)
 
-    # 元素仅能遍历，不能随机访问
+    # 元素仅能遍历，不能随机访问（因为他是无序的）
     for i in s1:
         print(i)
+
+#set1()
 
 # 集合的应用场景：去重、交集、差集。。。
 def set2():
     s1 = set([1,2,3,1,2]) # 去重
     print(s1) #
 
-    # 判断列表元素是否有重复
+    # 判断列表元素是否有重复（转化为set，求长度是否变小）
     l1 = [1,2,3,4,1]
-    print(len(l1) == len(set(l1)))
+    print("不重复" if len(l1) == len(set(l1)) else "有重复")
 
     # 是否毫不相干，不存在交集
     s1 = {1,2,3}
@@ -35,12 +42,14 @@ def set2():
     s3 = {3,4,5}
     print(s1.isdisjoint(s2))
     print(s1.isdisjoint(s3))
+    print("------")
 
     # 子集和父集判断
     s4 = {2,3}
     print(s4.issubset(s1))
     print(s4.issubset(s2))
     print(s1.issuperset(s4))
+    print("------")
 
     # 交并差
     print(s1.intersection(s3)) # 交集
@@ -49,14 +58,18 @@ def set2():
 
     # 子交并差的符号表示法，必须是两个集合之间
     print(s1 <= {1,2,3}) #子集和超集
-    print(s1 < {1,2,3})
+    print(s1 < {1,2,3}) #真子集
     print(s1 >= {1,2,3})
     print(s1 > {1,2,3})
     print(s1 & {1,2}) #交集
     print(s1 | s2) # 并集
     print(s1 - {1}) # 差集
 
-# 集合的更新、不可变集合
+#set2()
+
+# 集合的更新、不可变集合（frozenst）
+# update 方法会将传入集合中的元素添加到原集合中（自动去重），且该操作是原地修改，不返回新集合。
+# 和求并集的区别：更新是原地修改，不会返回新集合；求并集是返回新集合，不会原地修改。
 def set3():
     # 集合的更新
     s1 = {1,2,3}
@@ -81,7 +94,9 @@ def set3():
     # 清空
     s1.clear()
 
-# 可哈希：字典key和set，都必须是可hash的（也就是不可变值）
+#set3()
+
+# 可哈希：字典key，都必须是可hash的（也就是不可变值）
 def set4():
     print(hash(1))
     print(hash(1.0))
@@ -90,7 +105,8 @@ def set4():
     #通常来说，仅不可变的变量，才是可hash的
     print(hash("hello"))
     #print(hash([1,2])) 报错，因为[]是可变的
-    print(hash((1, 2)))
+    print(hash((1, 2))) # 元组，也是不可变的
+    #print(hash({1, 2})) # 集合，是可变的，所以不能hash
 
 
 #set1()

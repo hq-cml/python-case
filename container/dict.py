@@ -6,7 +6,7 @@ def dict1():
     m2 = dict(a=1, b=2, c=3) # 创建2，注意，key不能有引号
     m3 = dict([("a", 1),("b", 2),("c", 3)]) # 创建3，利用元组
     m4 = dict(zip(("a", "b", "c"), (1,2,3))) # 创建4，利用zip
-    print(m1== m2==m3==m4)
+    print(m1==m2==m3==m4) # 字典对比用==
     print(m4)
     m5 = dict.fromkeys(("a", "b", "c"), 101) # 创建5：给出keys，相同的值
     print(m5)
@@ -24,12 +24,15 @@ def dict1():
     m5.update({"b":2, "c":3}) # update批量更新key
     print(m5)
 
+#dict1()
+
 # 查
 def dict2():
     m1 = {"a": 1, "b": 2, "c": 3}
     print(m1["a"]) # 这种方法如果Key不存在，则会报错！
     print(m1.get("a", "not exsist"))
     print(m1.get("A", "not exsist")) # get方法则可以提供默认值
+
     #setdefault，有则无效，无则更新
     print(m1.setdefault("a", 10))
     print(m1.setdefault("d", 10))
@@ -46,6 +49,7 @@ def dict2():
     print(keys)
     print(values)
     print(items)
+    print("----")
 
     #copy，浅拷贝
     m2 = m1.copy()
@@ -56,7 +60,7 @@ def dict2():
     # 长度
     print(len(m1))
 
-    # 存在性
+    # 存在性，针对key而言
     print("a" in m1)
     print("x" in m1)
 
@@ -65,10 +69,12 @@ def dict2():
     print(list(m1.values()))
     print(list(reversed(m1.values()))) #对值进行翻转，感觉没啥意义
 
-    # 将字典转换为迭代器
+    # 将字典的key转换为迭代器
     it = iter(m1)  # 重置迭代器
     for i in it:
         print(i)
+
+#dict2()
 
 # 推导式
 def dict3():
@@ -81,6 +87,11 @@ def dict3():
     print(m4)
     m5 = {k:v for k in ["a", "b", "c"] for v in [1,2,3]} # 推导式嵌套
     print(m5) # 仔细看这个结果，想想为什么会是这样!
+    # 等价：
+    # d = {}
+    # for k in ["a", "b", "c"]:
+    #     for v in [1, 2, 3]:
+    #         d[k] = v
 
 #dict1()
 #dict2()

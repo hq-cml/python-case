@@ -1,13 +1,13 @@
 # 文件操作
 import pickle
 
-
 def func1():
     f = open("a.txt", "w")
     f.writelines("Hello\n")
     f.writelines("World")
     f.close()
 
+# 读取文件
 def func2():
     f = open("a.txt", "r+")
     for l in f:
@@ -18,12 +18,13 @@ def func2():
 from pathlib import Path
 
 #Note：with管理器，有点类似于golang的defer
+# 使用了with之后，无需再次手动close（with管理器自动执行）
 def func3():
     with open("a.txt", "w") as f:
         f.write("aaa")
-        1/0 # 虽然程序会报错终端，但是仍然可以完成内容保存，因为f.close将有with管理器来负责执行
+        1/0 # 虽然程序会报错终端，但是仍然可以完成内容保存，因为f.close将由with管理器来负责执行
 
-#Note: 序列化和反序列化
+#Note: 序列化和反序列化，用于存储和传输
 def func4():
     import pickle
     with open("data.pkl", "wb") as f:
@@ -33,7 +34,7 @@ def func4():
 def func5():
     import pickle
     with open("data.pkl", "rb") as f:
-        print(pickle.load(f))
+        print(pickle.load(f)) # 顺序必须和func4中dump的保持一致
         print(pickle.load(f))
 
 #func1()

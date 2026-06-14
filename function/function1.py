@@ -4,14 +4,14 @@ def func1():
 
 # 参数
 def func2():
-    def subf1(a, b): # Note：函数嵌套
+    def subf1(a, b): # Note：函数嵌套，函数内部定义另一个函数
         print(a,b)
 
-    # 位置参数
+    # 位置参数调用
     subf1("hello", "world")
-    # 关键字参数
+    # 关键字参数调用
     subf1(b = "world", a = "hello")
-    # 同时使用，则关键字参数必须放在位置参数后面
+    # 位置和关键字，两种调用同时使用，则关键字参数必须放在位置参数后面
     subf1("hello", b = "world")
 
     # 参数默认值（必须放最后）
@@ -30,8 +30,9 @@ def func2():
         print(a, b)
     #sub4(a=1, 2) # 报错
     sub4(1, b=2)
+    print("------")
 
-    # 不定参数（收集参数）
+    # 不定参数（收集参数），本质上底层是元组
     def sub5(*args):
         print("有{}个参数".format(len(args)))
         print("第2个参数是：{}".format(args[1]))
@@ -44,25 +45,35 @@ def func2():
         print(args)
         print(p1)
     sub6(1,2,3, p1="a") # 必须如此，否则报错
+    print("----")
 
     # **号，表示参数将被转化为字典，此时必须配合关键字参数
     def sub7(**args):
+        print(type(args)) # Note：底层是字典,<class 'dict'>
         print(args)
     sub7(a="1", b="2")
+    print("----")
 
     # 参数解包，类似于golang的...
-    # 当一个函数是收集参数的时候，利用*可以将元组解包传入；同理**也是如此
+    # 当一个函数是收集参数的时候，利用*可以将元组解包传入
+    # 当一个函数是字典参数的时候，利用**将字典解包传入
     def sub8(a,b,c):
         print(a,b,c)
     p1 = (1,2,3)
     sub8(*p1) # 此时必须要*进行解包，直接传入p1会报错，类似于golang的...
     p2 = {"a":1, "b":2, "c":3}
     sub7(**p2)
-    sub8(**p2)
+    sub8(**p2) # 这个有点奇怪，实际上是字典解包：
+               # p2 = {"a":1, "b":2, "c":3}，**p2 会把字典的键值对按关键字拆开
+               # 相当于 sub8(a=1, b=2, c=3)
+    print("----")
 
-    # *和**同时有的情况
+    # format函数：
+    #  本质上就是同时拥有*和**同时有的情况
+    #  通过help来查看证明
     help(str.format)
 
+func2()
 
 # 返回值
 def func3():
@@ -73,22 +84,7 @@ def func3():
     x, y, z = sub1()
     print(x, y, z) # 也可以直接解包得到返回值
 
-# 作用域
-x = 100 # 全局
-def func4():
-    print(x)
-
-# 嵌套函数 & 内部修改外部值
-def func5():
-    x= 10
-    def funcs1():
-        nonlocal x # 声明x是非本地，也就是外层x
-        x = 20
-        print("in funcs1: ", x)
-    funcs1()
-    print("in func5: ", x)
-
 #func2()
 #func3()
 #func4()
-func5()
+#func5()

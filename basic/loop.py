@@ -2,7 +2,7 @@ def loop1():
     i = 0
     while True:
         print(i)
-        i += 1  # Python没有 ++ ！
+        i += 1  # Note: Python没有 ++ ！
         if i == 10 :
             break
 
@@ -17,7 +17,8 @@ def loop2():
     else: # else会执行
         print("out loop, i=", i)
 
-# else会执行的例子
+# else不会执行的例子
+# else的执行时机：循环条件不满足（其他原因导致的循环结束不包括）
 def loop3():
     i = 0
     while i < 5:
@@ -29,7 +30,7 @@ def loop3():
         print("out loop, i=", i)
 
 # for 循环
-# Note: range()，将数字转换成可迭代对象
+# Note: range()，将数字转换成可迭代对象，左闭右开！
 def loop4():
     for i in "abc":
         print(i)
@@ -43,6 +44,7 @@ def loop4():
     for i in range(5,10, 2): # 开始，结束，步进
         print(i)
 
+#loop4()
 
 # 综合例子，素数分析
 def loop5(n=10):
@@ -51,10 +53,10 @@ def loop5(n=10):
             if i % x == 0:
                 print(i, "不是素数")
                 break
-        else:
+        else: # 对应for的结束条件！
             print(i, "是素数")
 #loop1()
 #loop2()
 #loop3()
 #loop4()
-loop5()
+#loop5()

@@ -1,5 +1,5 @@
 .idea
 .venv
-a.txt
-data.pkl
+basic/a.txt
+basic/data.pkl
 __pycache__

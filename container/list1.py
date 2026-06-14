@@ -8,7 +8,7 @@ def list1():
     print(l[-2])      # 倒数第2个元素
 
 #Note：切片，和go类似；
-#      并且还新增支持step
+#      并且还新增支持step步长
 def list2():
     l = [1,2,3,4,5,6,7]
     print(l[1:3])
@@ -17,6 +17,8 @@ def list2():
     print(l[:])
     print(l[::2]) # 步进2
     print(l[::-1]) # 倒序切片（列表），优雅
+
+#list2()
 
 #Note: 列表：增
 def list3():
@@ -31,10 +33,12 @@ def list3():
     print(l1)
     l1.remove(8) # 删除元素（只会删除第一个出现的；如果元素不存在，则直接报错！）
     print(l1)
-    l1.pop(2) # 删除idx=2的元素
+    l1.pop(2) # 删除idx=2的元素，Note: 注意remove和pop的区别
     print(l1)
-    l1.clear() # 自我销毁=>空列表
+    l1.clear() # 清空元素=>空列表
     print(l1)
+
+#list3()
 
 #Note: 列表：改
 def list4():
@@ -42,7 +46,7 @@ def list4():
     print(l)
     l[1] = 2 # 通过下标改元素
     print(l)
-    l[3:] = [40, 50] # 利用切片替换，从idx=3开始替换
+    l[3:] = [40, 50] # 利用切片替换，从idx=3开始替换，Note：这种用法相当于将数组从idx=3开始截断了，然后拼接新的！
     print(l)
     l.reverse() # 倒排序（直接影响list本身）
     print(l)
@@ -51,7 +55,7 @@ def list4():
     l.sort(reverse=True) # 倒排序 == reverse()
     print(l)
     l.sort()
-    l.insert(2, 3)
+    l.insert(2, 3) # 插入
     print(l)
     print(l.count(3)) # 元素计数
     print(l.index(40)) # 查找元素位置（第一次出现）
@@ -60,6 +64,12 @@ def list4():
     print(l2)
     l3 = l[:]  #列表拷贝（浅拷贝），利用切片
     print(l3)
+    l[1] = 88 # 虽然是浅拷贝，但是改变了原来的list，不影响其他list（Note：拷贝的深浅，其实针对的是嵌套列表，也就是二维列表）
+    print(l)
+    print(l2)
+    print(l3)
+
+#list4()
 
 #Note: 列表：加法、乘法、嵌套
 def list5():
@@ -76,14 +86,18 @@ def list5():
             print(i, end=' ') # 规定结尾符，默认是换行
         print()
     print(matrix[1][1])
+    print("---------")
     #通过循环创建和初始化一个matrix
     #Note：这里不能写成A = [[0]*3]*3 !，可以用下面的is运算符来分析原因
     A = [0] * 3
+    print(A)
     for i in range(3):
         A[i] = [0] * 3
     print(A)
 
-# is运算法：追本溯源，查看变量引用是否一致
+#list5()
+
+# is运算法：同一性运算符，追本溯源，查看变量引用是否一致
 def list6():
     a = "hello"
     b = "hello"
@@ -95,73 +109,7 @@ def list6():
     y = x         # 列表的赋值，只是引用的赋值！
     print(x is y)
     x [0] = 2
-    print(x)
+    print(x) # 引用赋值，所以同时受影响
     print(y)
 
-# Note:浅拷贝和深拷贝
-#      浅拷贝可以很好的解决上面赋值引用的问题，但是，对于嵌套列表就力不从心了
-#      深拷贝才是最终完美的解决方案
-def list7():
-    x = [1,2,3]
-    y = x.copy() # 浅拷贝，但是可以解决上面仅赋值引用的问题
-    z = x[:]     # 利用切片，也同样是浅拷贝
-    print(x is y)
-    print(x is z)
-    print(y is z)
-    x [0] = 2
-    print(x)
-    print(y)
-    print(z)
-    # 潜拷贝的问题：对于嵌套列表存在坑
-    x = [[1,2],[3,4]]
-    y = x.copy()
-    x[0][1] = 8
-    print(x)
-    print(y)
-    # 深拷贝，需要导入copy模块！
-    import copy
-    x = [[1, 2], [3, 4]]
-    z = copy.deepcopy(x) # 深拷贝是一个递归的过程
-    x[0][1] = 8
-    print(x)
-    print(z)
-
-# Note：列表推导式（步进优雅，而且效率更高，因为推导式是用C实现的）
-def list8():
-    l = [1,2,3]
-    y = [i*2 for i in l] # 列表元素*2
-    print(y)
-    print([i for i in range(10)]) # 推导式初始化一个列表
-    print([i*10 for i in range(10)])
-    print([c*2 for c in "Hello"])
-    print([ord(c) for c in "Hello"]) # 每个字符转成unicode编码
-    matrix = [[1,2,3], # 矩阵
-              [4,5,6],
-              [7,8,9]]
-    print([row[1] for row in matrix]) # 推导列表第二列
-    print([matrix[i][i] for i in range(len(matrix[0]))]) # 对角线
-    # 推导式创建并初始化n维数组
-    n = 3
-    print([[0] * n for i in range(n)])
-
-# Note:推导式高级用法
-# if 分句，用于二次过滤
-# 推导式的嵌套
-def list9():
-    print([i for i in range(20) if i % 2==0]) # 仅打印偶数序列
-    print([w for w in ["fuck", "bitch", "shit", "bullshit"] if w[0] == 'b']) # 取出b开头的单词
-    matrix = [[1,2,3], # 矩阵
-              [4,5,6],
-              [7,8,9]]
-    print([ c for row in matrix for c in row]) # 利用推导式嵌套，将二维展开成一维，有点烧脑
-    print([x+y for x in "abc" for y in "ABC" ]) # 笛卡尔积
-    print([[x,y] for x in range(10) if x %2==0 for y in range(10) if y%3==0]) # 嵌套和if相结合
-#list1()fatkun
-#list2()
-#list3()
-#list4()
-#list5()
 #list6()
-#list7()
-#list8()
-list9()
